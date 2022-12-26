@@ -1,2 +1,1 @@
-# Snake-JS-OOP
-The popular game 'Snake' created with OOP method for training purposes / 
+# Mini Games - for fun and self-development 
