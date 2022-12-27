@@ -1,0 +1,23 @@
+body {
+  padding: 0;
+  margin: 0;
+  cursor: none;
+}
+
+.score-board {
+  position: absolute;
+  top: 0;
+  padding: 0;
+  margin: 0 auto;
+  width: 100%;
+}
+.score-board .score-digits-container p {
+  color: white;
+}
+.score-board .reset {
+  border: none;
+  background-color: black;
+  color: white;
+  cursor: pointer;
+  font-size: 15px;
+}/*# sourceMappingURL=style.css.map */
