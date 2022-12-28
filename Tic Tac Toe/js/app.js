@@ -55,7 +55,7 @@ const runGame = function() {
   }
   const changePlayer = function() {
     nextMove = nextMove === 'X' ? 'O' : 'X';
-    
+    nextTurn.innerHTML = `Next player: ${nextMove}`;
   }
   const checkWinner = function() {
     for (let i = 0; i <= 7; i++) {
@@ -66,6 +66,7 @@ const runGame = function() {
         boxIndexVal[winningCondition[1]] == '' ||
         boxIndexVal[winningCondition[2]] == ''
       ) {
+        console.log(boxIndexVal);
         continue;
       } else if (
         boxIndexVal[winningCondition[0]] ==

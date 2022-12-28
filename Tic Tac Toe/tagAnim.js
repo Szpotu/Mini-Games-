@@ -1,14 +1,18 @@
 // Append canvas on board 
+
 const canvas = document.createElement('canvas');
 let boxElement = document.querySelector('.box');
-let board = document.querySelector('.board');
-board.append(canvas);
+document.body.append(canvas);
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+
+
 //Styles from css file 
 const tagColor = window.getComputedStyle(boxElement).color;
-let ctx = canvas.getContext('2d');
-canvas.width = board.getBoundingClientRect().width;
-canvas.height = board.getBoundingClientRect().height;
 
+let ctx = canvas.getContext('2d');
+ctx.clearRect(0,0,canvas.width,canvas.height);
 export let runAnim = (tag,box) =>{
     if(tag ==='X'){
         animateCross(box);
@@ -23,21 +27,36 @@ export let clearBoard = () =>{
 }
 
 let animateCircle = (box) =>{
-    let ctx = canvas.getContext('2d');
-    ctx.fillStyle = tagColor;
-    ctx.strokeStyle = 'tagColor';
-    ctx.beginPath();
-    ctx.lineWidth = 5;
-    ctx.arc(box.x, box.y, 5, 0, Math.PI*2);
-    ctx.stroke();
+    let rectBox = box.getBoundingClientRect();
+    let currentProgress = 0;
+    let endpoint = 50; 
     
-}
+    const draw = function (currentPercentage, boxRect){
+        ctx.strokeStyle = 'white';
+        ctx.clearRect(0,0,canvas.width, canvas.height);
+        ctx.beginPath();
+        ctx.arc(boxRect.x + boxRect.width/2, boxRect.y + boxRect.height/2, 30, currentPercentage*currentProgress, endpoint, false); 
+        ctx.stroke();
+        currentProgress++; 
+        console.log(currentProgress);
+        if(currentProgress<endpoint){
+            requestAnimationFrame(()=>{
+                draw(currentProgress/1000, rectBox);
+            });
+        }
+      
+    }
+    
+    draw(currentProgress,rectBox);
+    
+    // Starts from left side of the box so it can draw the 
+}   
+ 
+
 let animateCross = (box) =>{
-    let boxRect = box.getBoundingClientRect();
-    
-    ctx.fillRect(boxRect.x, boxRect.y, boxRect.width, boxRect.height);
-    ctx.stroke();
+    console.log('cross');
 }
-//take Position X from clicked box 
-//take Position Y from clicked box
-// Tomorrow ..  
+let chalk = () =>{
+    console.log('Chalk'); 
+    //Create an animation which is going to imitate a chalk particles around cross/circle tag
+}
